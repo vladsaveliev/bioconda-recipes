@@ -18,9 +18,9 @@ requirements:
     - zlib
 
   run:
-    - viennarna ==2.3.2
+    - viennarna ==2.3.3
     - rnaz >=2.1
-    - locarna ==1.9.0
+    - locarna ==1.9.1
     - infernal >=1.1.2
     - gmp
     - perl-threaded
