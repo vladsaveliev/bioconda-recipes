@@ -25,6 +25,7 @@ requirements:
     - gmp
     - perl-threaded
     - libgcc
+    - zlib
 
 test:
   commands:
