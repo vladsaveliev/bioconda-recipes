@@ -24,7 +24,7 @@ requirements:
     - infernal >=1.1.2
     - gmp
     - perl-threaded
-    - libgcc
+    - gcc
     - zlib
 
 test:
