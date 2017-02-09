@@ -21,7 +21,6 @@ requirements:
     - perl
     - gmp
     - zlib
-    - gcc
 
   run:
     - viennarna ==2.3.3
@@ -30,7 +29,7 @@ requirements:
     - infernal >=1.1.2
     - gmp
     - perl
-    - libgcc
+    - libgcc 
     - zlib
 
 test:
