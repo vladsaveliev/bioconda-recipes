@@ -1,24 +1,29 @@
-{% set version="2.7" %}
+{% set name = "perl-bio-db-hts" %}
+{% set version = "2.11" %}
+{% set sha256 = "1893bfb3ad5c67623609a228092980a1b21825746e33161b723bf5156067c8bc" %}
 
 package:
-  name: perl-bio-db-hts
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://cpan.metacpan.org/authors/id/R/RI/RISHIDEV/Bio-DB-HTS-{{ version }}.tar.gz
-  md5: a09468d02a7e58673b177e60915f28b0
+  fn: Bio-DB-HTS-{{ version }}.tar.gz
+  url: https://cpan.metacpan.org/authors/id/A/AV/AVULLO/Bio-DB-HTS-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
 
+# If this is a new build for the same version, increment the build
+# number. If you do not include this key, it defaults to 0.
 build:
-  number: 3
-  skip: true # [osx]
+  number: 0
 
 requirements:
-  host:
+  build:
     - zlib
     - perl
     - perl-module-build
     - perl-bioperl
     - htslib
+    - perl-extutils-cbuilder
   run:
     - zlib
     - perl
@@ -26,13 +31,45 @@ requirements:
     - htslib
 
 test:
-  # disable temporarily because of bug in conda-build
-  # https://github.com/conda/conda-build/issues/1967
-  #imports:
-  #  - Bio::DB::HTS
-  #  - Bio::DB::HTS::Faidx
+  # Perl 'use' tests
+  imports:
+    - Bio::DB::HTS
+    - Bio::DB::HTS::AlignWrapper
+    - Bio::DB::HTS::Alignment
+    - Bio::DB::HTS::Constants
+    - Bio::DB::HTS::Fai
+    - Bio::DB::HTS::Faidx
+    - Bio::DB::HTS::FetchIterator
+    - Bio::DB::HTS::Kseq
+    - Bio::DB::HTS::Kseq::Record
+    - Bio::DB::HTS::Pileup
+    - Bio::DB::HTS::PileupWrapper
+    - Bio::DB::HTS::Query
+    - Bio::DB::HTS::ReadIterator
+    - Bio::DB::HTS::Segment
+    - Bio::DB::HTS::Segment::Iterator
+    - Bio::DB::HTS::SplitAlignmentPart
+    - Bio::DB::HTS::Tabix
+    - Bio::DB::HTS::Tabix::Iterator
+    - Bio::DB::HTS::Target
+    - Bio::DB::HTS::VCF
+    - Bio::DB::HTS::VCF::Header
+    - Bio::DB::HTS::VCF::HeaderPtr
+    - Bio::DB::HTS::VCF::Iterator
+    - Bio::DB::HTS::VCF::Row
+    - Bio::DB::HTS::VCF::RowPtr
+    - Bio::DB::HTS::VCF::Sweep
+    - Bio::DB::HTSfile
+    - Bio::SeqFeature::HTSCoverage
+
+  # You can also put a file called run_test.pl (or run_test.py) in the recipe
+  # that will be run at test time.
 
 about:
-  home: https://metacpan.org/pod/Bio::DB::HTS
-  license: Apache v2.0
-  summary: Read files using HTSlib including BAM/CRAM, Tabix and BCF database files
+  home: http://metacpan.org/pod/Bio::DB::HTS
+  license: apache_2_0
+  summary: 'Perl interface to HTS library for DNA sequencing'
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
